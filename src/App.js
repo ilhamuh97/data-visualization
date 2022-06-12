@@ -1,23 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import InputFile from './components/InputFile/InputFile';
+import Main from './components/Main/Main';
 
 function App() {
+  const [data, setData] = useState(null);
+  const [groupBy, setGroupBy] = useState([]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>
+        Data Visualization
+      </h1>
+      <InputFile setData={setData} groupBy={groupBy} setGroupBy={setGroupBy} />
+      <Main data={data} groupBy={groupBy} />
     </div>
   );
 }
