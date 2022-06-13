@@ -74,7 +74,7 @@ const ScatterPlot = ({ data, setupData, dimensions, groupBy }) => {
 
             // Color Scale
             var color = d3.scaleSequential().domain([d3.min(data, d => d[setupData.color]), d3.max(data, d => d[setupData.color])])
-                .interpolator(d3.interpolatePuRd);
+                .interpolator(d3.interpolateYlOrBr);
 
             var mouseover = function (e, d) {
                 d3.selectAll(".dot").transition()
@@ -86,6 +86,14 @@ const ScatterPlot = ({ data, setupData, dimensions, groupBy }) => {
 
             var mouseclick = function (e, d) {
                 setSelectedData(d)
+                d3.selectAll(".dot")
+                .transition().duration(100)
+                    .attr("stroke", '#000')
+                    .attr("stroke-width", 0.5)
+                d3.select(this).transition()
+                    .duration(100)
+                    .attr("stroke", 'red')
+                    .attr("stroke-width", 2)
             }
 
             var mouseleave = function (e, i) {
@@ -114,7 +122,6 @@ const ScatterPlot = ({ data, setupData, dimensions, groupBy }) => {
                                 }
                             });
                         }
-
                     })
                     return founded
                 } else {
